@@ -1,5 +1,6 @@
 <template>
 <div class="about">
+    <span class="title">Hi, I'm HGnaseel</span>
     <div class="main_text" style="">About</div>
 </div>
 </template>
@@ -16,6 +17,13 @@ export default {
     width:140%;
     background: black;
     position:relative;
+    font-size: 50px;
+    .title{
+        color:rgb(139, 133, 133);
+        position:fixed;
+        top: 50px;
+        left: calc(50% - 180px);
+    }
     .main_text{
         left: 10%; 
         top: 70px;
