@@ -8,11 +8,11 @@
     </div>
 
     <div @mousemove="mainMove()" class="home_main" id="temp">
-      <div @mouseout="mainOut(0)" @mouseover="mainOver(0)" class="home_main_text" id="Colunm">Colunm<div></div></div>
-      <div @mouseout="mainOut(1)" @mouseover="mainOver(1)" class="home_main_text" id="Project">Pjt</div>
-      <div @mouseout="mainOut(2)" @mouseover="mainOver(2)" class="home_main_text" id="About">About</div>
-    </div>
-
+      
+      <div v-for="(item, index) in main_link_list" :key="item.name" 
+      @click="mainClick(main_link_list[index].name,main_link_list[index].url)" @mouseout="mainOut(index)" @mouseover="mainOver(index)" 
+      class="home_main_text" v-bind:id="item.name">{{item.name}}</div>
+      </div>
   </div>
 </template>
 
@@ -27,6 +27,11 @@ export default {
         { name:"kaggle", url:"https://www.kaggle.com/Gnaseel" },
         { name:"tistory", url:"https://gnaseel.tistory.com" },
       ],
+      main_link_list:[
+        { name:"Column", url:"http://localhost:8080/#/Projects" },
+        { name:"Pjt", url:"http://localhost:8080/#/Projects" },
+        { name:"About", url:"http://localhost:8080/#/Projects" },
+      ],
     }
   },
   methods:{
@@ -36,7 +41,7 @@ export default {
     },
     mainOver(num){
       let list = [
-        "Colunm", "Project", "About"
+        "Column", "Pjt", "About"
       ]
       
       for(let i=0;i<3;i++){
@@ -49,7 +54,7 @@ export default {
     },
     mainOut(num){
       let list = [
-        "Colunm", "Project", "About"
+        "Column", "Pjt", "About"
       ]
       for(let i=0;i<3;i++){
         let v=list[i];
@@ -65,13 +70,33 @@ export default {
       var y=event.clientY;
       var mX= screen.width/2-x;
       var mY= screen.height/2-y;
-      
+      console.log(mX+' '+mY);
       //document.getElementById('temp').style.left = mX*0.5+'px'; 
       //document.getElementById('temp').style.top = mY*0.2-30+'px';
-      document.getElementById('temp').style.marginLeft= mX*0.1+'px';
-      document.getElementById('temp').style.marginTop= mY*0.2+'px';
-    }
+      if(mX<500||mX>-500) document.getElementById('temp').style.marginLeft= mX*0.7+'px';
+      if(mY<250||mY>-250) document.getElementById('temp').style.marginTop= mY*0.2+'px';
+    },
+    mainClick(id,url){
+      
+      
+      var el=document.getElementById(id+"_se");
+     
+      el.id="selected";
+      el.style.left="10%";
+      el.style.top="10%";
+
+      /* Mouse stop */
+      var main=document.getElementById("temp");
+      main.id="stop";
+      main.style.marginLeft="0px";
+      main.style.marginTop="0px";
+      setTimeout(function(){
+          location.href= url;
+      },2000);
+      
+    },
   },
+  
 };
 </script>
 <style lang="scss">
@@ -111,17 +136,14 @@ export default {
     height:700px;
     width:140%;
     display:flex;
-    align-items: center;
-    justify-content: center;
     transition-duration: 2s;
     transition-timing-function:ease;
-    position:absolute;
+    position: absolute;
     color:rgb(211, 196, 174);
-    overflow:hidden;
 
     .home_main_text{
       display:inline-block;
-      position:relative;
+      position: absolute;
       transition-duration: 0.8s;
       font-weight: bold;
     }
@@ -132,44 +154,54 @@ export default {
      transition-duration:2s;
     }
 
-    #Colunm{
-      left:-30%;
+    #Column{
+      top:35%;
+      left:-25%;
     }
-    #Colunm_un{
-      left:-30%;
+    #Column_un{
+      top:35%;
+      left:-25%;
       color:rgb(92, 87, 80);
       font-size:80%;
     }
-    #Colunm_se{
+    #Column_se{
+      top:35%;
       z-index: 3;
       left:-5%;
     }
-    #Project{
-      margin-top:150px;
-      left:-18%;
+    #Pjt{
+      top:55%;
+      left:30%; 
     }
-    #Project_un{
-      margin-top:150px;
+    #Pjt_un{
       color:rgb(92, 87, 80);
-      left:-18%;
+      top:55%;
+      left:30%;
       font-size:80%;
     }
-    #Project_se{
-      margin-top:120px;
+    #Pjt_se{
+      top:55%;
+      left:27%;
       z-index: 3;
-      left:-18%;
+      
     }
     #About{
-      right:3%;
+      top:35%;
+      left:65%;
     }
     #About_un{
-      right:3%;
+      top:35%;
+      left:65%;
       color:rgb(92, 87, 80);
       font-size:80%;
     }
     #About_se{
-      z-index:   3;
-      right:15%;
+      top:35%;
+      z-index:3;
+      left:55%;
+    }
+    #selected{
+
     }
   }
 }
