@@ -115,6 +115,7 @@ export default {
     left: calc(50% - 180px);
   }
   .home_link{
+    z-index: 3;
     position:fixed;
     font-size: 20px;
     display:inline-block;

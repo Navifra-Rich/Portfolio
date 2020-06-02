@@ -1,6 +1,20 @@
 <template>
 <div class="projects">
     <span class="title">Hi, I'm HGnaseel</span>
+    <div class="menu_link">
+        <div class="menu_button" @mouseover="dropdownMenu">
+            메뉴
+        </div>
+        <div class="menu_item" v-for="item in main_link_list" :key="item.name">
+                {{item.name}}
+        </div>
+    </div>
+    <div class="home_link">
+      <div class="home_text" v-for="link in linkList" :key="link.name">
+        <p @click="linkClick(link.url)">{{link.name}}</p>
+      </div>
+    </div>
+    <div class="homeLink"></div>
     <div class="main_text" style="">Pjt</div>
     <div class="projects_panel">
         <div class="projects_next">
@@ -13,13 +27,19 @@
             <div class="projects_disc">{{imgList[pjtCount].disc}}</div>
         </div>
         <div class="projects_panel_right">
-            <img class="projects_img" :src=imgList[pjtCount].url>
-            <div class="projects_img_disc">
-                <div class="projects_skills">기술 스택~~<br>
-                    <p v-for="(item,index) in imgList[pjtCount].stack" :key="item.id">{{imgList[pjtCount].stack[index]}} </p>
+            <div class="panel_view">
+                <div class="pjt_item" v-for="pjt in imgList" :key="pjt.id">
+
+                    <img class="projects_img" :src=pjt.url>
+                    <div class="projects_img_disc">
+                        <div class="projects_skills">기술 스택~~<br>
+                            <p v-for="(item,index) in pjt.stack" :key="item.id">{{pjt.stack[index]}} </p>
+                        </div>
+                        <div class="projects_date">제작기간<br>{{pjt.date}}</div>
+                        <div class="projects_git">상세정보.......깃 주소 링크</div>
+                    </div>
+
                 </div>
-                <div class="projects_date">제작기간<br>{{imgList[pjtCount].date}}</div>
-                <div class="projects_git">상세정보.......깃 주소 링크</div>
             </div>
         </div>
     </div>
@@ -48,16 +68,43 @@ export default {
                     stack:["C++", "DataStructure", "Java"],
                 },
             ],
+            linkList:[
+                { name:"git", url:"https://github.com/Gnaseel" },
+                { name:"kaggle", url:"https://www.kaggle.com/Gnaseel" },
+                { name:"tistory", url:"https://gnaseel.tistory.com" },
+            ],
+            main_link_list:[
+                { name:"Home", url:"http://localhost:8080/#" },
+                { name:"Column", url:"http://localhost:8080/#/Column" },
+                { name:"About", url:"http://localhost:8080/#/About" },
+            ],
         }
     },
     methods:{
         nextProject(num){
             this.pjtCount+=num;
+            var el = document.getElementsByClassName('panel_view');
+          
             if(this.pjtCount<0)
                 this.pjtCount=this.imgList.length-1;
             else if(this.pjtCount==this.imgList.length)
                 this.pjtCount=0;
-        }
+            
+            el[0].style.transform = "translate(0px, "+ this.pjtCount*-550+"px)";
+            
+        },
+        linkClick(url){
+            window.open(url);
+        },
+        dropdownMenu(){
+           var arr=document.getElementsByClassName('menu_item');
+           var menu=document.getElementsByClassName('menu_button');
+           menu[0].style.position="relative";
+   
+          while(arr!=null){
+               arr[0].className='menu_item_on';
+           }
+        },
     },
 }
 </script>
@@ -69,6 +116,64 @@ export default {
     background: black;
     position:relative;
     font-size: 50px;
+    color:white;
+    .menu_link{
+        top:110px;
+        left:80px;
+        width:100px;
+        height:300px;
+        position:absolute;
+        background: white;
+        color:blanchedalmond;
+        font-size:30px;
+        .menu_button{
+            height:65px;
+            width:80px;
+            margin-left: 10px;
+            margin-bottom:10px;
+            background: black;
+            position:fixed;
+        }
+        .menu_item{
+            height:65px;
+            width:80px;
+            margin-bottom:10px;
+            margin-left: 10px;
+            background:black;
+            position: fixed;
+            display: none;
+            transition-duration: 1s;
+        }
+        .menu_item_on{
+            left:10px;
+            height:65px;
+            width:80px;
+            margin-bottom:10px;
+            //margin-left: 10px;
+            background:black;
+            //position: absolute;
+            display: inline-block;
+            transition-duration: 1s;
+        }
+           
+    }
+    .home_link{
+        z-index: 3;
+        position:fixed;
+        font-size: 20px;
+        display:inline-block;
+        align-items: center;
+        vertical-align: middle;
+        right:50px;
+        line-height: 50px;
+        .home_text{
+            :hover{
+                color:black;
+                background: whitesmoke;
+                transition-duration:0.4s;
+            }
+        }
+    }
     .title{
         color:rgb(139, 133, 133);
         position:fixed;
@@ -135,43 +240,56 @@ export default {
         }
         .projects_panel_right{
             position:absolute;
-            left:27%;
+            left:28%;
             width:900px;
             height:550px;
+            overflow: hidden;
             background: white;
-            .projects_img{
+
+            .panel_view{
+                width:900px;
+                height:1550px;
                 position: absolute;
-                left:25px;
-                top:25px;
-                width:500px;
-                height:500px;
+                transition-duration: 1s;
+                .pjt_item{
+                    width:900px;
+                    height:550px;
+                    position:relative;
+                    .projects_img{
+                    position: absolute;
+                    left:25px;
+                    top:25px;
+                    width:500px;
+                    height:500px;
+                    }
+                    .projects_img_disc{
+                    
+                        position:absolute;
+                        left:550px;
+                        width:325px;
+                        height:500px;
+                        top:25px;
+                        text-align:left;
+                        color:blanchedalmond;
+                        .projects_skills{
+                            margin-bottom: 10px;
+                            height:240px;
+                            background: black;
+                        }
+                        .projects_date{
+                            margin-bottom: 10px;
+                            height:140px;
+                            background: black;
+                        }
+                        .projects_git{
+                            margin-bottom: 10px;
+                            height:100px;
+                            background: black;
+                        }
+                    }
+                }
+                
             }
-            .projects_img_disc{
-               
-                position:absolute;
-                left:550px;
-                width:325px;
-                height:500px;
-                top:25px;
-                text-align:left;
-                color:blanchedalmond;
-                .projects_skills{
-                    margin-bottom: 10px;
-                    height:240px;
-                    background: black;
-                }
-                .projects_date{
-                    margin-bottom: 10px;
-                    height:140px;
-                    background: black;
-                }
-                .projects_git{
-                    margin-bottom: 10px;
-                    height:100px;
-                    background: black;
-                }
-            }
-            
         }
     }
     
