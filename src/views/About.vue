@@ -36,16 +36,14 @@
 <script>
 export default {
     mounted(){
-        
         setTimeout(function(){
             scrollTo({top:400,behavior:'smooth'});
         },500);
-        
     },  
     methods:{
-        hidden(){
-
-        },
+        linkClick(url){
+            window.open(url);
+      },
     },
     data(){
         return {

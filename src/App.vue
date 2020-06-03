@@ -16,3 +16,12 @@
   color: #2c3e50;
 }
 </style>
+<script>
+export default {
+  methods:{
+      linkClick(url){
+            window.open(url);
+      },
+  }
+}
+</script>

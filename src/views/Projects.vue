@@ -20,7 +20,7 @@
         <div class="projects_next">
                 <button @click="nextProject(-1)">좌로</button>
                 <button @click="nextProject(1)">우로</button>
-            </div>
+        </div>
         <div class="projects_panel_left">
             
             <div class="projects_title">{{imgList[pjtCount].title}}</div>
@@ -48,6 +48,20 @@
 
 <script>
 export default {
+    mounted(){
+            var r_panel=document.getElementsByClassName('projects_panel_right');
+            var l_panel = document.getElementsByClassName('projects_panel_left');
+            var b_panel = document.getElementsByClassName('projects_next');
+            var m_panel = document.getElementsByClassName('menu_link');
+            setTimeout(function(){
+                r_panel[0].style.transform ="translate(-1000px, 0px)";
+                l_panel[0].style.transform ="translate(0px, -1000px)";
+                b_panel[0].style.transform ="translate(1000px, 0px)";
+                m_panel[0].style.transform ="translate(1000px, 0px)";
+            },200);
+           
+   
+        },
     data(){
         return{
             pjtCount:0,
@@ -81,6 +95,7 @@ export default {
         }
     },
     methods:{
+        
         nextProject(num){
             this.pjtCount+=num;
             var el = document.getElementsByClassName('panel_view');
@@ -117,15 +132,17 @@ export default {
     position:relative;
     font-size: 50px;
     color:white;
+    
     .menu_link{
         top:110px;
-        left:80px;
+        left:-920px;
         width:100px;
         height:300px;
         position:absolute;
         background: white;
         color:blanchedalmond;
         font-size:30px;
+        transition-duration: 2s;
         .menu_button{
             height:65px;
             width:80px;
@@ -196,10 +213,12 @@ export default {
         position:relative;
         font-size:20px;
         top:20%;
+        transition-duration: 1s;
         .projects_next{
             position:absolute;
             top:200px;
-            left:400px;
+            left:-600px;
+            transition-duration: 2s;
             button{
                 width:80px;
                 height:80px;
@@ -214,9 +233,10 @@ export default {
             
             width:500px;
             height:250px;
-            top:300px;
+            top:1300px;
             left:80px;
             text-align: left;
+            transition-duration: 2s;
             .projects_title{
                 margin: 15px 0 0 15px;
                 color:white;
@@ -240,12 +260,12 @@ export default {
         }
         .projects_panel_right{
             position:absolute;
-            left:28%;
+            left:1605px;
             width:900px;
             height:550px;
             overflow: hidden;
             background: white;
-
+            transition-duration: 2s;
             .panel_view{
                 width:900px;
                 height:1550px;
@@ -293,5 +313,9 @@ export default {
         }
     }
     
+    overflow: hidden;    
+}::-webkit-scrollbar {
+        display: none;
 }
+
 </style>
