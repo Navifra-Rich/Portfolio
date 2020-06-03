@@ -178,7 +178,7 @@ export default {
         color:rgb(139, 133, 133);
         position:fixed;
         top: 50px;
-        left: calc(50% - 180px);
+        left:573px;
     }
     .main_text{
         left: 10%; 
