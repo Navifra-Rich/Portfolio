@@ -166,9 +166,7 @@ export default {
             height:65px;
             width:80px;
             margin-bottom:10px;
-            //margin-left: 10px;
             background:black;
-            //position: absolute;
             display: inline-block;
             transition-duration: 1s;
         }

@@ -11,7 +11,7 @@
     
     <div class="about_content">
         <div class="title_image">
-            <p>대충 치명적인 척 하는 흑백사진</p>
+            <img src="../assets/aboutImg.png">
         </div>
         <div class="about_disc_panel">
             <p class="about_disc_title"><span v-html="aboutDiscTitle"></span></p>
@@ -19,15 +19,13 @@
             </p>
         </div>
         <div class="skill_stack_title">Skill Stack</div>
-        <div class="skill_stack_panel" v-for="stack in skillStack" :key="stack.domain">
+        <div class="skill_stack_panel" v-for="(stack, stackIdx) in skillStack" :key="stack.domain">
             <div class="stack_domain">{{stack.domain}}</div>
-            <div class="stack_skill" v-for="(skill, index) in stack.skills" :key="skill.id">
-                <img :src=stack.skillsIcon[index] @mouseover="hidden">
+            <div class="stack_skill"  @mouseover="printSkillDisc(stackIdx,index)" v-for="(skill, index) in stack.skills" :key="skill.id">
+                <img :src=stack.skillsIcon[index] >
                 <div class="skill_name">{{stack.skills[index]}}</div>
-                <div class="skill_disc">
-                    {{stack.skillsDisc[index]}}
-                </div>
             </div>
+            <div class="skill_disc"></div>
         </div>
     </div>
 </div>
@@ -44,6 +42,18 @@ export default {
         linkClick(url){
             window.open(url);
       },
+      printSkillDisc(idx1,idx2){
+          //alert('!!');
+          var el=document.getElementsByClassName('skill_disc');
+          el[idx1].innerHTML="<br><br>"+this.skillStack[idx1].skillsDisc[idx2];
+
+          // skillpanel 최소 height 조정 (패널 크기가 discription에 의해 바뀌어서 화면이 위아래로 흔들리는 것 방지)
+          var panel=document.getElementsByClassName('skill_stack_panel');
+          var val = panel[idx1].clientHeight;
+
+          if(panel[idx1].style.minHeight<val)
+          panel[idx1].style.minHeight= val+"px";
+      }
     },
     data(){
         return {
@@ -56,48 +66,40 @@ export default {
                             <br/>\
                             Hi' I'm H-gnaseel",
                 aboutDiscContent:"엔지니어는 항상 어떻게 일하는지에 관심이 많습니다.<br/>\
-                            어떻게 해야 더 클라이언트의 요구를 잘 이해할 수 있을지,<br/>\
-                            어떻게 하면 더 완벽하게 설계할 수 있을지,<br/>\
-                            어떻게 인프라를 갖춰야 더 효율적인 시스템이 탄생할지<br/>\
                             <br/>\
                             하지만 우리는 How보다도 Why에 관심을 가져야 합니다.<br/>\
                             <br/>\
-                            이 프로그램으로 인해서 사용자가 어떤 편의를 얻을 수 있을지,<br/>\
-                            우리가 이 시스템을 만드는 것은 어떤 가치를 추구하기 때문인지,<br/>\
                             내가 만드는 모든 것들이 기존의 질서를 산산히 와해시켜서<br/>\
-                            더 나은, 더 긍정적인 세상을 향해 기술의 경계에서 미증유의 새로운 변화를 일으켰는지<br/>\
+                            <br/>\
+                            더 나은, 더 긍정적인 세상을 향한 경계에서 미증유의 변화를 일으키도록<br/>\
                             <br/>\
                             저는 항상 끈임없이 가치를 추구합니다.<br/>\
+                            <br/>\
+                            사진은 바꿀겁니다...느낌만 볼라고 올린거라 면도도 안했으...\
                             ",
-            
-        
-        
                 skillStack:[
                     {   
-                        domain:"Front end", skills:["html", "css", "JavaScript"], 
-                        skillsIcon:[require('../assets/225.225.png'), require('../assets/225.225.png'), require('../assets/225.225.png')], 
+                        domain:"Front end", skills:["html", "css", "JavaScript"], level:[3,2,3], 
+                        skillsIcon:[require('../assets/about/html.png'), require('../assets/about/css.png'), require('../assets/about/js.png')], 
                         skillsDisc:[
                             "기본적인 태그의 사용법과 의미, 웹 표준을 이해하고 있습니다.",
                             "간단한 에니메이션을 사용할 수 있고, 컴포넌트를 어떻게 다뤄야하는지 이해하고 있습니다.",
-                            "스크립트 언어에 익숙해지는데는 많은 시간이 걸리는 것 같습니다.\
-                             항상 간단한 사이트 제작은 직접 프론트 엔드까지 다뤘었고, 고도의 기술이 필요하지 않은 \
-                             작업은 Java script로 직접처리할 수 있습니다."
+                            "항상 간단한 사이트 제작은 직접 프론트 엔드까지 다뤘기 때문에 문제없이 사용합니다."
                             ],
                     },
                     {   
-                        domain:"Front end - FrameWord", skills:["vue.js", "Jquery"], 
-                        skillsIcon:[require('../assets/225.225.png'), require('../assets/225.225.png')], 
+                        domain:"Front end - FrameWord", skills:["vue.js", "Jquery"], level:[2,3], 
+                        skillsIcon:[require('../assets/about/vue.png'), require('../assets/about/jquery.png')], 
                         skillsDisc:[
-                            "학교에서 간단한 프로젝트를 vue로 진행해봤었는데, 컴포넌트를 다루는 방법이 흥미로워서\
-                             개인적으로도 공부하고 있습니다. 지금 보고있는 포트폴리오 사이트도 vue.js로 이루어져있습니다.\
-                             프론트 엔드는 주 분야가 아니지만, 재미가 있어 항상 새로운 기술을 접하면 시도해봅니다.",
-                            "vue를 배우기 이전까지는 작업 능률을 위해서 항상Jquery를 사용했습니다. 물론 90%이상은 \
+                            "학교에서 간단한 프로젝트를 vue로 진행해봤었는데, 컴포넌트를 다루는 방법이 상당히 흥미롭습니다.<br>\
+                             그래서 개인적으로도 공부하고 있고, 지금 보고있는 포트폴리오 사이트도 vue.js로 이루어져있습니다.",
+                            "vue를 배우기 이전까지는 작업 능률을 위해서 항상Jquery를 사용했습니다.<br> 물론 90%이상은 \
                              웹의 구성요소를 쉽고 빠르게 선택하기 위한 셀렉터 호출이었지만 간단한 AJAX통신도 구성할 수 있습니다.",
                             ],
                     },
                     {   
-                        domain:"Back end skills", skills:["Spring", "php"], 
-                        skillsIcon:[require('../assets/225.225.png'), require('../assets/225.225.png')], 
+                        domain:"Back end skills", skills:["Spring", "php"], level:[3,3], 
+                        skillsIcon:[require('../assets/about/spring.png'), require('../assets/225.225.png')], 
                         skillsDisc:[
                             "Spring 프레임워크를 사용해서 많은 프로젝트를 진행했습니다.\
                              Spring의 강점인 MVC패턴이나 의존성 주입에서 큰 매력을 느낀 것 같습니다.\
@@ -107,7 +109,7 @@ export default {
                             ],
                     },
                      {   
-                        domain:"Data base", skills:["Oracle", "MySQL"], 
+                        domain:"Data base", skills:["Oracle", "MySQL"], level:[3,2], 
                         skillsIcon:[require('../assets/225.225.png'), require('../assets/225.225.png')], 
                         skillsDisc:[
                             "Spring과 연계해서 로그인 기능이 있는 게시판을 구현할 때 다뤄봤습니다.",
@@ -125,7 +127,7 @@ export default {
 <style lang="scss">
 .about{
     scroll-behavior: smooth;
-    height:1500px;
+    height:3500px;
     width:140%;
     background: black;
     position:relative;
@@ -167,7 +169,8 @@ export default {
         position: absolute;
         width:1200px;
         height:1500px;
-        background: blueviolet;
+        //background: blueviolet;
+        background : black;
         color: blanchedalmond;
         .title_image{
             top:50px;
@@ -177,6 +180,11 @@ export default {
             background:black;
             position:absolute;
             vertical-align: middle;
+            img{
+                width:400px;
+                height:400px;
+                border-radius: 15px;
+            }
         }
         .about_disc_panel{
             padding-left:20px;
@@ -196,21 +204,27 @@ export default {
             }
         }
         .skill_stack_title{
-            top:500px;
+            top:620px;
             left:50px;
             width:400px;
             height:170px;
             position:absolute;
             background: black;
+            font-size:70px;
+            color:blueviolet;
         }
         .skill_stack_panel{
             margin:30px 30px 30px 0px;
+            border-left: 3px solid blueviolet;
             padding:20px;
             top:700px;
             left:50px;
             width:1080px;
-            height:400px; //높이는 동적으로 바뀌어야될듯??
+            //height:400px; //높이는 동적으로 바뀌어야될듯??
+            //overflow:auto;
+            height:auto;
             position:relative;
+            display:table;
             background: black;
             text-align: left;
             .stack_domain{
@@ -227,7 +241,8 @@ export default {
                 height:300px;
                 position:relative;
                 display:inline-block;
-                background:brown;
+                border-radius: 30px;
+                //background:brown;
                 img{
                     width:200px;
                     height:200px;
@@ -237,30 +252,38 @@ export default {
                 }
                 .skill_name{
                     top:220px;
-                    display:block;
+                    display:inline-block;
                     position:absolute;
-                    
+                    color:brown;
                 }
-                .skill_disc{
-                    position:absolute;
-                    display:none;
-                    color:black;
-                    text-align: left;
-                    font-size:15px;
-                    margin:10px;
-                }
-            }
-            :hover{
-                //display:none;
-                background:white;
+                
+            }:hover{
+                background:blueviolet;
                 transition-duration: 1s;
                 img{
                     display:none;
                 }
-                .skill_disc{
-                    display:inline-block;
-                }
+            }:hover~.skill_disc{
+                    width: 1000px;
+                    display:table-row;
+                    font-size:20px;
+                    transition-duration: 0.5s;
             }
+            .skill_disc{
+                    //position:relative;
+                    display:none;
+                    color:blanchedalmond;
+                    text-align: left;
+                    font-size:5px;
+                   
+                    background: none;
+                    transition-duration: 1s;
+                    p{
+                        font-size:5px;
+                        background: none;
+                        transition-duration: 1s;
+                    }
+                }
         }
     }
 }
