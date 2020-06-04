@@ -28,9 +28,9 @@ export default {
         { name:"tistory", url:"https://gnaseel.tistory.com" },
       ],
       main_link_list:[
-        { name:"Column", url:"/gnaseel/Column" },
-        { name:"Pjt", url:"/gnaseel/Projects" },
-        { name:"About", url:"/gnaseel/About" },
+        { name:"Column", url:"/Column" },
+        { name:"Pjt", url:"/Projects" },
+        { name:"About", url:"/About" },
       ],
     }
   },
