@@ -106,8 +106,9 @@ export default {
         },
         mainLinkClick(url){
             window.scrollTo({top:0, behavior:"smooth"});
+            this.$router.push(url);
             setTimeout(function(){
-                location.href=url;
+                //location.href=url;
             },400); 
         },
         linkClick(url){

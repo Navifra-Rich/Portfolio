@@ -28,9 +28,9 @@ export default {
         { name:"tistory", url:"https://gnaseel.tistory.com" },
       ],
       main_link_list:[
-        { name:"Column", url:"/Column" },
-        { name:"Pjt", url:"/Projects" },
-        { name:"About", url:"/About" },
+        { name:"Column", url:"/gnaseel/Column" },
+        { name:"Pjt", url:"/gnaseel/Projects" },
+        { name:"About", url:"/gnaseel/About" },
       ],
     }
   },
@@ -82,14 +82,16 @@ export default {
       el.id="selected";
       el.style.left="10%";
       el.style.top="10%";
-
+      if(url==null)
+        url=null;
       /* Mouse stop */
       var main=document.getElementById("temp");
       main.id="stop";
       main.style.marginLeft="0px";
       main.style.marginTop="0px";
+      this.$router.push(url);
       setTimeout(function(){
-          location.href= url;
+           //this.$router.push(url);
       },2000);
       
     },
