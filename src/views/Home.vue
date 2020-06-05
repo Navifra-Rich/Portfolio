@@ -75,6 +75,7 @@ export default {
       //document.getElementById('temp').style.top = mY*0.2-30+'px';
       if(mX<500||mX>-500) document.getElementById('temp').style.marginLeft= mX*0.7+'px';
       if(mY<250||mY>-250) document.getElementById('temp').style.marginTop= mY*0.2+'px';
+      // needFix - 화면 크기에 따른 비율로~
     },
     mainClick(id,url){
       var el=document.getElementById(id+"_se");
@@ -89,10 +90,10 @@ export default {
       main.id="stop";
       main.style.marginLeft="0px";
       main.style.marginTop="0px";
-      this.$router.push(url);
+      
       setTimeout(function(){
-           //this.$router.push(url);
-      },2000);
+        this.$router.push(url);
+      }.bind(this),2000);
       
     },
   },

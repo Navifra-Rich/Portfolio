@@ -12,7 +12,7 @@
         <div class="menu_item" @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}} </div>
     </div>
     <div class="column_panel">
-            아직구현안함<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
     </div>
 </div>
 </template>
@@ -55,8 +55,8 @@ export default {
             window.scrollTo({top:0, behavior:"smooth"});
             this.$router.push(url);
             setTimeout(function(){
-                //location.href=url;
-            },400); 
+                this.$router.push(url);
+            }.bind(this),400); 
         },
     },
 }
@@ -67,16 +67,15 @@ export default {
     height:1500px;
     width:140%;
     background: black;
-    position:fixed;
     font-size: 50px;
     color:white;
+    position:relative;
     .menu_link{
         top:110px;
-        left:-940px;
+        left:-960px;
         width:100px;
         height:300px;
-        position:absolute;
-        background: white;
+        position:fixed;
         color:blanchedalmond;
         font-size:30px;
         transition-duration: 2s;
@@ -131,7 +130,6 @@ export default {
         vertical-align: middle;
         right:50px;
         line-height: 50px;
-
         :hover{
             color:black;
             background: whitesmoke;
@@ -144,7 +142,6 @@ export default {
         position: absolute;
         width:1200px;
         height:1500px;
-        background: blueviolet;
         color: blanchedalmond;
     }
 }

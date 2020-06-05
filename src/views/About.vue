@@ -112,7 +112,7 @@ export default {
                 main_link_list:[
                     { name:"Home", url:"/gnaseel/" },
                     { name:"Column", url:"/gnaseel/Column" },
-                    { name:"Projects", url:"/gnaseel/Projects" },
+                    { name:"Project", url:"/gnaseel/Projects" },
                 ],
                 aboutDiscTitle:"끈임없이 가치를 추구하는 사람<br/>\
                             <br/>\
@@ -136,7 +136,8 @@ export default {
                         skillsDisc:[
                             "기본적인 태그의 사용법과 의미, 웹 표준을 이해하고 있습니다.",
                             "간단한 에니메이션을 사용할 수 있고, 컴포넌트를 어떻게 다뤄야하는지 이해하고 있습니다.",
-                            "항상 간단한 사이트 제작은 직접 프론트 엔드까지 다뤘기 때문에 문제없이 사용합니다."
+                            "개인 프로젝트는 항상 프론트 엔드까지 다뤘기 때문에 기본 문법과 개념을 숙지하고 있지만,<br>\
+                            스크립트 언어는 항상 어렵습니다."
                             ],
                     },
                     {   
@@ -190,7 +191,6 @@ export default {
         width:100px;
         height:300px;
         position:fixed;
-        background: white;
         color:blanchedalmond;
         font-size:30px;
         transition-duration: 2s;
@@ -222,20 +222,6 @@ export default {
             transition-duration: 1s;
         }
     }
-    .title{
-        color:rgb(139, 133, 133);
-        position: absolute;
-        top: 50px;
-        left:573px;
-    }
-    .main_text{
-        left: 10%; 
-        top: 70px;
-        position:absolute;
-        font-size:230px;
-        font-weight:bold;
-        color:rgb(211, 196, 174);
-    }
     .home_link{
         z-index: 3;
         position:fixed;
@@ -252,6 +238,21 @@ export default {
             transition-duration:0.4s;
         }
     }
+    .title{
+        color:rgb(139, 133, 133);
+        position: absolute;
+        top: 50px;
+        left:573px;
+    }
+    .main_text{
+        left: 10%; 
+        top: 70px;
+        position:absolute;
+        font-size:230px;
+        font-weight:bold;
+        color:rgb(211, 196, 174);
+    }
+    
     .up_button{
         background: blueviolet;
         font-size: 20px;
