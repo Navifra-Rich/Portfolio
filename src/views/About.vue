@@ -7,24 +7,26 @@
         <p @click="linkClick(link.url)">{{link.name}}</p>
       </div>
     </div>
-    <div class="up_button" @click="upScroll">위</div>
+    <div class="up_button">위</div>
     <div class="menu_link">
         <div class="menu_button" @mouseover="dropdownMenu"> 메뉴</div>
         <div class="menu_item" @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}} </div>
     </div>
     <div class="about_content">
-        <div class="title_image">
-            <img src="../assets/aboutImg.png">
-        </div>
-        <div class="about_disc_panel">
-            <p class="about_disc_title"><span v-html="aboutDiscTitle"></span></p>
-            <p class="about_disc_content"><span v-html="aboutDiscContent"></span>
-            </p>
+        <div class="about_head" v-on:scroll.passive="onScroll">
+            <div class="title_image">
+                <img src="../assets/aboutImg.png">
+            </div>
+            <div class="about_disc_panel" >
+                <p class="about_disc_title"><span v-html="aboutDiscTitle"></span></p>
+                <p class="about_disc_content"><span v-html="aboutDiscContent"></span>
+                </p>
+            </div>
         </div>
         <div class="skill_stack_title">Skill Stack</div>
-        <div class="skill_stack_panel" v-for="(stack, stackIdx) in skillStack" :key="stack.domain">
+        <div @mouseover="overSkillPanel(stackIdx)" class="skill_stack_panel" v-for="(stack, stackIdx) in skillStack" :key="stack.domain">
             <div class="stack_domain">{{stack.domain}}</div>
-            <div class="stack_skill"  @mouseover="printSkillDisc(stackIdx,index)" v-for="(skill, index) in stack.skills" :key="skill.id">
+            <div class="stack_skill" @click="skillClick(stackIdx)" @mouseover="printSkillDisc(stackIdx,index)" v-for="(skill, index) in stack.skills" :key="skill.id">
                 <img :src=stack.skillsIcon[index] >
                 <div class="skill_name">{{stack.skills[index]}}</div>
             </div>
@@ -37,6 +39,7 @@
 <script>
 export default {
     mounted(){
+        window.addEventListener('scroll',this.handleScroll);
         var m_panel = document.getElementsByClassName('menu_link');
         setTimeout(function(){
             scrollTo({top:400,behavior:'smooth'});
@@ -44,18 +47,29 @@ export default {
         },500);
     },  
     methods:{
-        upScroll(){
-            window.scrollTo({top:0,behavior:"smooth"});
+        handleScroll(){
+            var about_head = document.getElementsByClassName('about_head');
+            //scrollTo({top:about_head[0].getBoundingClientRect().top, behavior:'smooth'});
+        },
+        onScroll(){
+           alert('!?');
         },
         linkClick(url){
             window.open(url);
         },
         mainLinkClick(url){
             window.scrollTo({top:0, behavior:"smooth"});
-            this.$router.push(url);
             setTimeout(function(){
-                //location.href=url;
-            },400); 
+                this.$router.push(url);
+            }.bind(this),400);
+        },
+        skillClick(idx){
+            var panel=document.getElementsByClassName('skill_stack_panel');
+            var winHeight = panel[idx].getBoundingClientRect().top;
+            var winScroll = window.pageYOffset;
+            var scTo = winHeight+winScroll;
+            window.scrollTo({ top:scTo, behavior:'smooth'});
+            alert(event.clientY)
         },
         printSkillDisc(idx1,idx2){
             var el=document.getElementsByClassName('skill_disc');
@@ -67,6 +81,8 @@ export default {
 
             if(panel[idx1].style.minHeight<val)
             panel[idx1].style.minHeight= val+"px";
+
+          
         }, 
         dropdownMenu(){
            var arr=document.getElementsByClassName('menu_item');
@@ -76,6 +92,14 @@ export default {
             while(arr!=null){
                arr[0].className='menu_item_on';
             }
+        },
+        overSkillPanel(idx){
+            // var panel=document.getElementsByClassName('skill_stack_panel');
+            // var winHeight = panel[idx].getBoundingClientRect().top;
+            // var winScroll = window.pageYOffset;
+            // var scTo = winHeight+winScroll;
+            // window.scrollTo({ top:scTo, behavior:'smooth'});
+            //alert(event.clientY);
         },
     },
     data(){
@@ -243,38 +267,37 @@ export default {
         position: absolute;
         width:1200px;
         height:1500px;
-        //background: blueviolet;
         background : black;
         color: blanchedalmond;
-        .title_image{
-            top:50px;
-            left:50px;
-            width:400px;
-            height:400px;
-            background:black;
-            position:absolute;
-            vertical-align: middle;
-            img{
+        .about_head{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            .title_image{
                 width:400px;
                 height:400px;
-                border-radius: 15px;
+                background:black;
+                vertical-align: middle;
+                img{
+                    width:400px;
+                    height:400px;
+                    border-radius: 15px;
+                }
             }
-        }
-        .about_disc_panel{
-            padding-left:20px;
-            top:50px;
-            left:500px;
-            width:650px;
-            height:620px;
-            position:absolute;
-            background:black;
-            text-align: left;
-            .about_disc_title{
-                font-size:40px;
-                font-weight: bold;
-            }
-            .about_disc_content{
-                font-size: 20px;
+            .about_disc_panel{
+                margin-left: 30px;
+                padding-left:20px;
+                width:650px;
+                height:620px;
+                background:black;
+                text-align: left;
+                .about_disc_title{
+                    font-size:40px;
+                    font-weight: bold;
+                }
+                .about_disc_content{
+                    font-size: 20px;
+                }
             }
         }
         .skill_stack_title{
@@ -282,7 +305,6 @@ export default {
             left:50px;
             width:400px;
             height:170px;
-            position:absolute;
             background: black;
             font-size:70px;
             color:blueviolet;
@@ -291,7 +313,6 @@ export default {
             margin:30px 30px 30px 0px;
             border-left: 3px solid blueviolet;
             padding:20px;
-            top:700px;
             left:50px;
             width:1080px;
             //height:400px; //높이는 동적으로 바뀌어야될듯??
