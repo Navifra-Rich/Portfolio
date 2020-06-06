@@ -1,8 +1,8 @@
 <template>
 <div class="projects">
     <span class="title">Hi, I'm HGnaseel</span>
-    <div class="menu_link">
-        <div class="menu_button" @mouseover="dropdownMenu">
+    <div class="menu_link" @mouseleave="dropdownMenu('close')">
+        <div class="menu_button" @mouseover="dropdownMenu('open')" >
             메뉴
         </div>
         <div class="menu_item"  @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}}</div>
@@ -99,39 +99,43 @@ export default {
                 { id:"1", url:require('../assets/Projects/pjt_1.png'), 
                     title:"웹 사이트 제작", git:"a", date:"December 28, 2019 <br>&nbsp&nbsp~&nbsp&nbspFebruary 4, 2020",
                     disc:"Spring프레임 워크를 사용해서 만든 웹 사이트.<br\>\
-                            디자인은 BootStrap 라이브러리를 사용했고,<br\>\
-                            Oracle과 연동해서 간단한 회원가입 기능과 게시판 기능을 지원했다.",
+                            Oracle과 연동해서 간단한 회원가입 기능과 게시판 기능을 지원했다.\
+                            Oauth를 지원해서 구글 계정으로도 로그인 할 수 있고,\
+                            내부에서 구글 캘린더와도 연계되어있다.",
                     stack:["Web", "Java",  "Spring", "Oauth","BootStrap","Oracle"],
                     gitLink:"https://github.com/Gnaseel/SpringProject",
                 },
                 { id:"2", url:require('../assets/Projects/pjt_2.png'), 
                     title:"WebSocket 이용한 채팅서버", git:"a", date:"?~?",
-                    disc:"Client의 요청이 없어도 서버에서 실시간으로 데이터를 \
+                    disc:"Client의 요청없이도 선택적으로 데이터를 \
                     전송하는 WebSocket의 특징을 사용해서 채팅 서버를 구축<br>\
-                    but 이거 너무옛날에 한거라 깃에 안올라가있음<br>\
-                    조만간 다시 만들어서 업로드",
+                    git을 알기 전 다루던 프로젝트라 아직 업로드 되어있지 않다.<br>\
+                    조만간 다시 만들어서 업로드 할 예정",
                     stack:["Web","Websocket", "Java"],
                     gitLink:"",
                 },
                 { id:"3", url:require('../assets/Projects/pjt_3.png'), 
                     title:"REST방식 공공 데이터 검색", git:"a", date:"October 28, 2019 <br>&nbsp&nbsp~&nbsp&nbspNovember 4, 2019",
                     disc:"행정안전부의 개발자 센터와 국토교통부의 서버에서 REST방식으로 데이터를 받아와서\
-                     입력된 위치를 파악해 그 사이의 교통수단을 출력하는 웹 어플리케이션 서버를 제작했다.",
+                     입력된 위치를 파악해 그 사이의 교통수단을 출력하는 웹 어플리케이션 서버를 제작했다.\
+                     전통적인 Spring+Tomcat 조합으로 아직 배포는 하지 않았고, 정작업을 거친 후 배포 할 예정이다.",
                     stack:["Web", "REST", "Java" ,"Spring", "Jquery"],
                     gitLink:"https://github.com/Gnaseel/Tschedule",
                 },
                 { id:"4", url:require('../assets/Projects/pjt_2.png'), 
                     title:"Data Structure 라이브러리", git:"a", date:"May 15, 2020 <br>&nbsp&nbsp~&nbsp&nbspIn Progress",
                     disc:"현재 진행중<br>\
-                    C++ container 기반으로 자료구조 라이브러리를 만들고,\
-                    간단한 소팅도 지원할 예정이다.",
+                    C++ container 기반으로 자료구조 라이브러리를 직접 만들고,\
+                    간단한 소팅도 지원할 예정이다.<br>\
+                    처음 예상했던 것 보다 훨씬 더 언어에 대한 이해를 넓혀준 프로젝트",
                     stack:["C++", "DataStructure", "Algorithm", "Sorting"],
                     gitLink:"https://github.com/Gnaseel/CSstudy",
                 },
                 { id:"5", url:require('../assets/Projects/pjt_5.png'), 
                     title:"Psc Scheduling Simulator", git:"a", date:"April 4, 2020 <br>&nbsp&nbsp~&nbsp&nbspMay 23, 2020",
                     disc:"선택된 알고리즘을 바탕으로 프로세스간의 우선순위를 정하고,\
-                     프로세서에 할당되는 과정을 시각화한 애플리케이션이다.",
+                     프로세서에 할당되는 과정을 시각화한 애플리케이션이다.<br>\
+                     Java의 Swing라이브러리를 사용했고, Jsooth를 이용해 exe파일로 만들어 배포했다.",
                     stack:["Java", "Swing", "JSmooth"],
                     gitLink:"https://github.com/Gnaseel/Process-Scheduling-Simulator",
                     cowo:["임효석", "lapaho8645", "siszero"],
@@ -183,14 +187,28 @@ export default {
                 
             window.open(url);
         },
-        dropdownMenu(){
-           var arr=document.getElementsByClassName('menu_item');
-           var menu=document.getElementsByClassName('menu_button');
-           menu[0].style.position="relative";
-   
-          while(arr!=null){
-               arr[0].className='menu_item_on';
-           }
+        dropdownMenu(open){
+             var arr=document.getElementsByClassName('menu_item');
+            if(open==='open'){
+               
+                for(var i=0;i<arr.length;i++){
+                    arr[i].style.visibility = "visible";
+                }
+                for(var i=0;i<arr.length;i++){
+                   arr[i].style.transform = "translate( 0px, "+i*50+"px)";
+                }
+                
+            }else if(open==='close'){
+                
+                for(var i=0;i<arr.length;i++){
+                   arr[i].style.transform = "translate( -600px, 0px)";
+                }
+                    for(var i=0;i<arr.length;i++){
+                        arr[i].style.visibility = "hidden";
+                    }
+           
+            }
+           
         },
     },
 }
@@ -212,7 +230,6 @@ export default {
         width:100px;
         height:300px;
         position:fixed;
-        //background: white;
         color:blanchedalmond;
         font-size:30px;
         transition-duration: 2s;
@@ -222,7 +239,7 @@ export default {
             margin-left: 10px;
             margin-bottom:10px;
             background: black;
-            position:fixed;
+            position: relative;
         }
         .menu_item{
             height:65px;
@@ -230,19 +247,10 @@ export default {
             margin-bottom:10px;
             margin-left: 10px;
             background:black;
-            position: fixed;
-            display: none;
+            position: absolute;
+            visibility:hidden;
             transition-duration: 1s;
-        }
-        .menu_item_on{
-            left:10px;
-            height:65px;
-            width:80px;
-            margin-bottom:10px;
-            background:black;
-            display: inline-block;
-            transition-duration: 1s;
-        }    
+        }  
     }
     .home_link{
         z-index: 3;

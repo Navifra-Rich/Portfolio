@@ -45,7 +45,7 @@ export default {
                 ], 
             main_link_list:[
                     { name:"Home", url:"/gnaseel/" },
-                    { name:"Column", url:"/gnaseel/Column" },
+                    { name:"Pjt", url:"/gnaseel/Projects" },
                     { name:"About", url:"/gnaseel/About" },
                 ],
             columnList:[

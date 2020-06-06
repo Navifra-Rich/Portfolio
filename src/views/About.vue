@@ -114,20 +114,21 @@ export default {
                     { name:"Column", url:"/gnaseel/Column" },
                     { name:"Project", url:"/gnaseel/Projects" },
                 ],
-                aboutDiscTitle:"끈임없이 가치를 추구하는 사람<br/>\
+                aboutDiscTitle:"끈임없이 가치를 추구하는 엔지니어<br/>\
                             <br/>\
                             Hi' I'm H-gnaseel",
                 aboutDiscContent:"엔지니어들은 항상 어떻게 일하는지에 관심이 많습니다.<br/>\
                             <br/>\
                             하지만 우리는 How보다도 Why에 관심을 가져야 합니다.<br/>\
                             <br/>\
+                            제품을 만드는 것이 아닌, 그 제품이 가져오는 가치에 집중해야 합니다.\
+                            <br>\
                             내가 만드는 모든 것들이 기존의 질서를 산산히 와해시켜서<br/>\
                             <br/>\
                             더 나은, 더 긍정적인 세상을 향한 경계에서 미증유의 변화를 일으키도록.<br/>\
                             <br/><br/>\
-                            기술은 가치를 실현하기 위한 도구일 뿐입니다.<br/>\
+                            모든 기술은 가치를 실현하기 위한 도구일 뿐입니다.<br/>\
                             <br/>\
-                            사진은 바꿀겁니다...느낌만 볼라고 올린거라 면도도 안했으...\
                             ",
                 skillStack:[
                     {   
@@ -135,13 +136,13 @@ export default {
                         skillsIcon:[require('../assets/about/html.png'), require('../assets/about/css.png'), require('../assets/about/js.png')], 
                         skillsDisc:[
                             "기본적인 태그의 사용법과 의미, 웹 표준을 이해하고 있습니다.",
-                            "간단한 에니메이션을 사용할 수 있고, 컴포넌트를 어떻게 다뤄야하는지 이해하고 있습니다.",
-                            "개인 프로젝트는 항상 프론트 엔드까지 다뤘기 때문에 기본 문법과 개념을 숙지하고 있지만,<br>\
-                            스크립트 언어는 항상 어렵습니다."
+                            "간단한 에니메이션을 사용할 수 있고, 레이아웃을 어떻게 구성해야할 지 설계할 수 있습니다.",
+                            "개인 프로젝트는 항상 프론트 엔드까지 다뤘기 때문에 기본 문법과 개념을 숙지하고 있고,<br>\
+                            css와도 능숙하게 연계해서 사용합니다.."
                             ],
                     },
                     {   
-                        domain:"Front end - FrameWord", skills:["vue.js", "Jquery"], level:[2,3], 
+                        domain:"Front end - FrameWork", skills:["vue.js", "Jquery"], level:[2,3], 
                         skillsIcon:[require('../assets/about/vue.png'), require('../assets/about/jquery.png')], 
                         skillsDisc:[
                             "학교에서 간단한 프로젝트를 vue로 진행해봤었는데, 컴포넌트를 다루는 방법이 상당히 흥미롭습니다.<br>\
