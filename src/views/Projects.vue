@@ -2,12 +2,10 @@
 <div class="projects">
     <span class="title">Hi, I'm HGnaseel</span>
     <div class="menu_link" @mouseleave="dropdownMenu('close')">
-        <div class="menu_button" @mouseover="dropdownMenu('open')" >
-            메뉴
-        </div>
+        <div class="menu_button" @mouseover="dropdownMenu('open')" > 메뉴 </div>
         <div class="menu_item"  @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}}</div>
     </div>
-    <div class="home_link">
+    <div class="out_link">
       <div class="home_text" v-for="link in linkList" :key="link.name">
         <p @click="linkClick(link.url)">{{link.name}}</p>
       </div>
@@ -31,7 +29,6 @@
         <div class="projects_panel_right">
             <div class="panel_view">
                 <div class="pjt_item" v-for="pjt in imgList" :key="pjt.id">
-
                     <img class="projects_img" :src=pjt.url>
                     <div class="projects_img_disc">
                         <div class="projects_skills">
@@ -54,13 +51,7 @@
                                 </div>
                             </template>
                         </div>
-                        <!-- <div class="projects_middle" ></div>
-                        <div class="projects_git">
-                            <a :href="pjt.gitLink" target="_blank">GitHub</a>
-                            <button class="projects_more">More Info</button>
-                        </div> -->
                     </div>
-
                 </div>
             </div>
         </div>
@@ -69,6 +60,7 @@
 </template>
 
 <script>
+import * as common from '../js/common.js';
 export default {
     mounted(){
             //좌측 패널 초기값 설정
@@ -155,7 +147,12 @@ export default {
         }
     },
     methods:{
-        
+        dropdownMenu(open){
+            common.dropdownMenu(open);
+        },
+        mainLinkClick(url){
+            common.mainLinkClick(url,this);
+        },
         nextProject(num){
             var index = document.getElementsByClassName('projects_index');
             index[this.pjtCount].style.background ="gray";
@@ -173,12 +170,6 @@ export default {
             leftPanel[0].style.transform = "translate(0px, "+250*this.pjtCount+"px)";
             index[this.pjtCount].style.background ="blueviolet";
         },
-        mainLinkClick(url){
-            window.scrollTo({top:0, behavior:"smooth"});
-            setTimeout(function(){
-                this.$router.push(url);
-            }.bind(this),400); 
-        },
         linkClick(url){
             if(url==""){
                 alert('존재하지 않음');
@@ -187,110 +178,29 @@ export default {
                 
             window.open(url);
         },
-        dropdownMenu(open){
-             var arr=document.getElementsByClassName('menu_item');
-            if(open==='open'){
-               
-                for(var i=0;i<arr.length;i++){
-                    arr[i].style.visibility = "visible";
-                }
-                for(var i=0;i<arr.length;i++){
-                   arr[i].style.transform = "translate( 0px, "+i*50+"px)";
-                }
-                
-            }else if(open==='close'){
-                
-                for(var i=0;i<arr.length;i++){
-                   arr[i].style.transform = "translate( -600px, 0px)";
-                }
-                    for(var i=0;i<arr.length;i++){
-                        arr[i].style.visibility = "hidden";
-                    }
-           
-            }
-           
-        },
     },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "../css/common.scss";
 .projects{
     word-break:keep-all;
     height:100%;
     width:140%;
     background: black;
     position:relative;
-    font-size: 50px;
     color:white;
     * { box-sizing: border-box; }
-    .menu_link{
-        top:110px;
-        left:-920px;
-        width:100px;
-        height:300px;
-        position:fixed;
+
+    //Project는 다른 컴포넌트와 home text공유안됨. 가로로 넓어서 겹침
+    .home_text{
+        display: inline-block;
+        width:60px;
+        margin:15px;
         color:blanchedalmond;
-        font-size:30px;
-        transition-duration: 2s;
-        .menu_button{
-            height:65px;
-            width:80px;
-            margin-left: 10px;
-            margin-bottom:10px;
-            background: black;
-            position: relative;
-        }
-        .menu_item{
-            height:65px;
-            width:80px;
-            margin-bottom:10px;
-            margin-left: 10px;
-            background:black;
-            position: absolute;
-            visibility:hidden;
-            transition-duration: 1s;
-        }  
     }
-    .home_link{
-        z-index: 3;
-        position:fixed;
-        font-size: 20px;
-        display:inline-block;
-        align-items: center;
-        vertical-align: middle;
-        right:50px;
-        line-height: 50px;
-        .home_text{
-            display: inline-block;
-            width:60px;
-            margin:15px;
-            color:blanchedalmond;
-            :hover{
-                color:black;
-                background: whitesmoke;
-                transition-duration:0.4s;
-            }
-        }
-    }
-    .title{
-        color:rgb(139, 133, 133);
-        position:fixed;
-        top: 50px;
-        left:573px;
-    }
-    .main_text{
-        left: 10%; 
-        top: 70px;
-        position:absolute;
-        font-size:230px;
-        font-weight:bold;
-        color:rgb(211, 196, 174);
-    }
-    .projects_disc{
-        width:400px;
-        height:250px;
-    }
+ 
     .projects_panel{
         position:relative;
         font-size:20px;
@@ -332,9 +242,7 @@ export default {
             text-align: left;
             transition-duration: 2s;
             overflow: hidden;
-
             background: black;
-            //background:rgb(204, 194, 175);
             border: 3px solid silver;
             border-radius: 10px;
             .panel_left_view{

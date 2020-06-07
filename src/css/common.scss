@@ -1,0 +1,77 @@
+//--------------------------------------------좌측 메뉴 링크--------------------------------------------
+.menu_link{
+    top:110px;
+    left:-940px;
+    width:100px;
+    height:300px;
+    position:fixed;
+    color:blanchedalmond;
+    *{
+        height:45px;
+        width:90px;
+        font-size:25px;
+        line-height: 45px;
+    }
+    transition-duration: 2s;
+    .menu_button{
+        
+        margin-left: 10px;
+        margin-bottom:10px;
+        background: black;
+        position: relative;
+        
+    }
+    .menu_item{
+        margin-bottom:10px;
+        margin-left: 10px;
+        background:black;
+        position: absolute;
+        visibility:hidden;
+        transition-duration: 1s;
+        display:block;
+    }
+    .menu_item:hover{
+        background:blanchedalmond;
+        color:black;
+    }
+}
+//-------------------------------------------중앙 타이틀 (Hi, I'm Hgnaseel)-------------------------
+.title{
+    color:rgb(139, 133, 133);
+    position: absolute;
+    top: 50px;
+    left:573px;
+    font-size: 50px;
+}
+//----------------------------------------우측 상단 git, kaggle, tistory 링크 버튼-------------
+.out_link{
+    z-index: 3;
+    position:fixed;
+    font-size: 20px;
+    display:inline-block;
+    align-items: center;
+    vertical-align: middle;
+    right:50px;
+    line-height: 50px;
+    .home_text{
+      :hover{
+        color:black;
+        background: whitesmoke;
+        transition-duration:0.4s;
+     }
+    }
+  }
+  
+//------------------------------------- 좌측 상단 페이지 이름 (Pjt, Column, About)-----------------------------------
+.main_text{
+    left: 10%; 
+    top: 70px;
+    position:absolute;
+    font-size:230px;
+    font-weight:bold;
+    color:rgb(211, 196, 174);
+}
+//-------------------------------------- Common Style (font, font-size, background...)------------------------------------
+*{
+    font-size: 16px;
+}

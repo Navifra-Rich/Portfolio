@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <span class="home_title">Hi, I'm HGnaseel</span>
-    <div class="home_link">
+    <span class="title">Hi, I'm HGnaseel</span>
+    <div class="out_link">
       <div class="home_text" v-for="link in linkList" :key="link.name">
         <p @click="linkClick(link.url)">{{link.name}}</p>
       </div>
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Home",
   data(){
@@ -35,7 +34,6 @@ export default {
     }
   },
   methods:{
-    
     linkClick(url){
       window.open(url);
     },
@@ -108,33 +106,17 @@ export default {
   display:inline-block;
   background: black;
   color:blanchedalmond;
-  font-size: 50px;
+
   span{
     color:rgb(139, 133, 133);
     position:fixed;
     top: 50px;
     left:573px;
   }
-  .home_link{
-    z-index: 3;
-    position:fixed;
-    font-size: 20px;
-    display:inline-block;
-    align-items: center;
-    vertical-align: middle;
-    right:50px;
-    line-height: 50px;
-    .home_text{
-      :hover{
-        color:black;
-        background: whitesmoke;
-        transition-duration:0.4s;
-     }
-    }
-  }
+  
   .home_main{
     margin-top:50px;
-    font-size:230px;
+    
     height:700px;
     width:140%;
     display:flex;
@@ -143,7 +125,9 @@ export default {
     position: absolute;
     color:rgb(211, 196, 174);
 
+    *{font-size:230px;}
     .home_main_text{
+      font-size:230px;
       display:inline-block;
       position: absolute;
       transition-duration: 0.8s;
@@ -151,11 +135,10 @@ export default {
     }
     :hover{
      color:rgb(211, 169, 111);
-     font-size:120%; 
+     font-size:280px; 
      letter-spacing: 10px;
      transition-duration:2s;
     }
-
     #Column{
       top:35%;
       left:-25%;
@@ -164,7 +147,7 @@ export default {
       top:35%;
       left:-25%;
       color:rgb(92, 87, 80);
-      font-size:80%;
+      font-size:150px;
     }
     #Column_se{
       top:35%;
@@ -179,7 +162,7 @@ export default {
       color:rgb(92, 87, 80);
       top:55%;
       left:30%;
-      font-size:80%;
+      font-size:150px;
     }
     #Pjt_se{
       top:55%;
@@ -195,7 +178,7 @@ export default {
       top:35%;
       left:65%;
       color:rgb(92, 87, 80);
-      font-size:80%;
+      font-size:150px;
     }
     #About_se{
       top:35%;

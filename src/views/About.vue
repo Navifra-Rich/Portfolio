@@ -2,14 +2,14 @@
 <div class="about">
     <span class="title">Hi, I'm HGnaseel</span>
     <div class="main_text" style="">About</div>
-    <div class="home_link">
+    <div class="out_link">
       <div class="home_text" v-for="link in linkList" :key="link.name">
         <p @click="linkClick(link.url)">{{link.name}}</p>
       </div>
     </div>
     <div class="up_button">위</div>
-    <div class="menu_link">
-        <div class="menu_button" @mouseover="dropdownMenu"> 메뉴</div>
+    <div class="menu_link" @mouseleave="dropdownMenu('close')">
+        <div class="menu_button" @mouseover="dropdownMenu('open')" >메뉴</div>
         <div class="menu_item" @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}} </div>
     </div>
     <div class="about_content">
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import * as common from '../js/common.js';
 export default {
     mounted(){
         window.addEventListener('scroll',this.handleScroll);
@@ -47,6 +48,12 @@ export default {
         },500);
     },  
     methods:{
+        dropdownMenu(open){
+            common.dropdownMenu(open);
+        },
+        mainLinkClick(url){
+            common.mainLinkClick(url,this);
+        },
         handleScroll(){
             var about_head = document.getElementsByClassName('about_head');
             //scrollTo({top:about_head[0].getBoundingClientRect().top, behavior:'smooth'});
@@ -57,12 +64,7 @@ export default {
         linkClick(url){
             window.open(url);
         },
-        mainLinkClick(url){
-            window.scrollTo({top:0, behavior:"smooth"});
-            setTimeout(function(){
-                this.$router.push(url);
-            }.bind(this),400);
-        },
+        
         skillClick(idx){
             var panel=document.getElementsByClassName('skill_stack_panel');
             var winHeight = panel[idx].getBoundingClientRect().top;
@@ -84,15 +86,6 @@ export default {
 
           
         }, 
-        dropdownMenu(){
-           var arr=document.getElementsByClassName('menu_item');
-           var menu=document.getElementsByClassName('menu_button');
-           menu[0].style.position="relative";
-
-            while(arr!=null){
-               arr[0].className='menu_item_on';
-            }
-        },
         overSkillPanel(idx){
             // var panel=document.getElementsByClassName('skill_stack_panel');
             // var winHeight = panel[idx].getBoundingClientRect().top;
@@ -178,82 +171,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../css/common.scss";
 .about{
     scroll-behavior: smooth;
     height:3500px;
     width:140%;
     background: black;
     position:relative;
-    font-size: 50px;
     color:white;
-    .menu_link{
-        top:110px;
-        left:-940px;
-        width:100px;
-        height:300px;
-        position:fixed;
-        color:blanchedalmond;
-        font-size:30px;
-        transition-duration: 2s;
-        .menu_button{
-            height:65px;
-            width:80px;
-            margin-left: 10px;
-            margin-bottom:10px;
-            background: black;
-            position:fixed;
-        }
-        .menu_item{
-            height:65px;
-            width:80px;
-            margin-bottom:10px;
-            margin-left: 10px;
-            background:black;
-            position: fixed;
-            display: none;
-            transition-duration: 1s;
-        }
-        .menu_item_on{
-            left:10px;
-            height:65px;
-            width:80px;
-            margin-bottom:10px;
-            background:black;
-            display: inline-block;
-            transition-duration: 1s;
-        }
-    }
-    .home_link{
-        z-index: 3;
-        position:fixed;
-        font-size: 20px;
-        display:inline-block;
-        align-items: center;
-        vertical-align: middle;
-        right:50px;
-        line-height: 50px;
-
-        :hover{
-            color:black;
-            background: whitesmoke;
-            transition-duration:0.4s;
-        }
-    }
-    .title{
-        color:rgb(139, 133, 133);
-        position: absolute;
-        top: 50px;
-        left:573px;
-    }
-    .main_text{
-        left: 10%; 
-        top: 70px;
-        position:absolute;
-        font-size:230px;
-        font-weight:bold;
-        color:rgb(211, 196, 174);
-    }
-    
     .up_button{
         background: blueviolet;
         font-size: 20px;
