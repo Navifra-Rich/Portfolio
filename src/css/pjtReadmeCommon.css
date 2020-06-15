@@ -1,0 +1,28 @@
+h1{
+    color:rgb(255, 0, 0);
+    font-weight:bold;
+    font-size:70px;
+}
+h2{
+    color:rgb(209, 209, 209);
+    font-size: 40px;
+    margin-left:5px;
+}   
+h3{
+    color:rgb(151, 145, 145);
+    font-size: 30px;
+    margin-left:15px;
+}
+h4{
+    color:rgb(117, 112, 112);
+    font-size: 25px;
+    margin-left:18px;
+}
+p{
+    color:blanchedalmond;
+    margin-left:10px;
+}
+img{
+    max-width: 1200px;
+    
+}

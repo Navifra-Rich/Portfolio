@@ -21,3 +21,10 @@ export function mainLinkClick(url,obj){
         obj.$router.push(url);
     }.bind(obj),400); 
 };
+//-----------------------------------------홈화면 이동------------------------------------------------------
+export function goHome(obj){
+    window.scrollTo({top:0, behavior:"smooth"});
+    setTimeout(function(){
+        obj.$router.push("/gnaseel/");
+    }.bind(obj),400); 
+};

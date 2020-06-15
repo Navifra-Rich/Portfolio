@@ -1,13 +1,13 @@
 <template>
 <div class="about">
-    <span class="title">Hi, I'm HGnaseel</span>
+    <span class="title" @click="goHome">Hi, I'm HGnaseel</span>
     <div class="main_text" style="">About</div>
     <div class="out_link">
       <div class="home_text" v-for="link in linkList" :key="link.name">
         <p @click="linkClick(link.url)">{{link.name}}</p>
       </div>
     </div>
-    <div class="up_button">위</div>
+    <div class="up_button" @click="goTop">위</div>
     <div class="menu_link" @mouseleave="dropdownMenu('close')">
         <div class="menu_button" @mouseover="dropdownMenu('open')" >메뉴</div>
         <div class="menu_item" @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}} </div>
@@ -48,11 +48,17 @@ export default {
         },500);
     },  
     methods:{
+        goTop(){
+            scrollTo({top:0, behavior:"smooth"});
+        },
         dropdownMenu(open){
             common.dropdownMenu(open);
         },
         mainLinkClick(url){
             common.mainLinkClick(url,this);
+        },
+        goHome(){
+            common.goHome(this);
         },
         handleScroll(){
             var about_head = document.getElementsByClassName('about_head');

@@ -1,6 +1,6 @@
 <template>
 <div class="projects">
-    <span class="title">Hi, I'm HGnaseel</span>
+    <span class="title" @click="goHome">Hi, I'm HGnaseel</span>
     <div class="menu_link" @mouseleave="dropdownMenu('close')">
         <div class="menu_button" @mouseover="dropdownMenu('open')" > 메뉴 </div>
         <div class="menu_item"  @click="mainLinkClick(item.url)" v-for="item in main_link_list" :key="item.name"> {{item.name}}</div>
@@ -56,11 +56,19 @@
             </div>
         </div>
     </div>
+    <div class="projects_readme_panel">
+      <component :is="readMe[this.pjtCount]"></component>
+    </div>
 </div>
 </template>
 
 <script>
 import * as common from '../js/common.js';
+import pjt1 from "../components/pjt1.vue";
+import pjt2 from "../components/pjt2.vue";
+import pjt3 from "../components/pjt3.vue";
+import pjt4 from "../components/pjt4.vue";
+import pjt5 from "../components/pjt5.vue";
 export default {
     mounted(){
             //좌측 패널 초기값 설정
@@ -86,6 +94,8 @@ export default {
         },
     data(){
         return{
+            readMe:[pjt1,pjt2,pjt3,pjt4,pjt5],
+            
             pjtCount:0,
             imgList:[
                 { id:"1", url:require('../assets/Projects/pjt_1.png'), 
@@ -98,19 +108,19 @@ export default {
                     gitLink:"https://github.com/Gnaseel/SpringProject",
                 },
                 { id:"2", url:require('../assets/Projects/pjt_2.png'), 
-                    title:"WebSocket 이용한 채팅서버", git:"a", date:"?~?",
-                    disc:"Client의 요청없이도 선택적으로 데이터를 \
-                    전송하는 WebSocket의 특징을 사용해서 채팅 서버를 구축<br>\
-                    git을 알기 전 다루던 프로젝트라 아직 업로드 되어있지 않다.<br>\
-                    조만간 다시 만들어서 업로드 할 예정",
+                    title:"WebSocket 이용한 채팅서버", git:"a", date:"May 29, 2019 <br>&nbsp&nbsp~&nbsp&nbspJune 15, 2019",
+                    disc:"Express + Vue.js를 이용해서 채팅 어플리케이션을 제작했다. \
+                    GCP에서 컴퓨터를 임대받아 NodeJS의 내장 HTTTP 라이브러리로 서버를 구축하고, \
+                    채팅 내용이 실시간 갱신될 수 있도록 WebSocket을 사용해서 통신했다. \
+                    HTTP에서 비동기로 서버와 데이터를 주고받는 노하우를 익힌 좋은 경험이 되었다.",
                     stack:["Web","Websocket", "Java"],
-                    gitLink:"",
+                    gitLink:"https://github.com/Gnaseel/MEVNWebSocket",
                 },
                 { id:"3", url:require('../assets/Projects/pjt_3.png'), 
                     title:"REST방식 공공 데이터 검색", git:"a", date:"October 28, 2019 <br>&nbsp&nbsp~&nbsp&nbspNovember 4, 2019",
                     disc:"행정안전부의 개발자 센터와 국토교통부의 서버에서 REST방식으로 데이터를 받아와서\
                      입력된 위치를 파악해 그 사이의 교통수단을 출력하는 웹 어플리케이션 서버를 제작했다.\
-                     전통적인 Spring+Tomcat 조합으로 아직 배포는 하지 않았고, 정작업을 거친 후 배포 할 예정이다.",
+                     전통적인 Spring+Tomcat 조합으로 아직 배포는 하지 않았고, 수 정작업을 거친 후 배포 할 예정이다.",
                     stack:["Web", "REST", "Java" ,"Spring", "Jquery"],
                     gitLink:"https://github.com/Gnaseel/Tschedule",
                 },
@@ -144,9 +154,16 @@ export default {
                 { name:"Column", url:"/gnaseel/Column" },
                 { name:"About", url:"/gnaseel/About" },
             ],
+           
         }
     },
+    components:{
+        
+    },
     methods:{
+        goHome(){
+            common.goHome(this);
+        },
         dropdownMenu(open){
             common.dropdownMenu(open);
         },
@@ -186,7 +203,7 @@ export default {
 @import "../css/common.scss";
 .projects{
     word-break:keep-all;
-    height:100%;
+    padding-bottom: 100px;
     width:140%;
     background: black;
     position:relative;
@@ -203,8 +220,9 @@ export default {
  
     .projects_panel{
         position:relative;
+        height:700px;
         font-size:20px;
-        top:20%;
+        top:120px;
         transition-duration: 1s;
         .projects_next{
             display:flex;
@@ -403,10 +421,18 @@ export default {
             }
         }
     }
-    
-    overflow: hidden;    
-}::-webkit-scrollbar {
-        display: none;
+    .projects_readme_panel{
+        position: relative;
+        background:black;
+        width:1425px;
+        //height:500px;
+        border: white solid 1px;
+        padding : 0 50px 50px 50px;
+        left:80px;
+
+        text-align:left;
+      
+    }
 }
 
 </style>

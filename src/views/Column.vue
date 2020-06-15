@@ -1,6 +1,6 @@
 <template>
 <div class="column">
-    <span class="title">Hi, I'm HGnaseel</span>
+    <span class="title" @click="goHome">Hi, I'm HGnaseel</span>
     <div class="main_text" style="">Column</div>
     <div class="out_link">
         <div class="home_text" v-for="link in linkList" :key="link.name">
@@ -96,6 +96,9 @@ export default {
         }
     },
     methods:{
+        goHome(){
+            common.goHome(this);
+        },
         dropdownMenu(open){
            common.dropdownMenu(open);
         },
